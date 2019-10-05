@@ -38,7 +38,6 @@ class batch_norm(object):
 # standard convolution layer
 def conv2d(x, inputFeatures, outputFeatures, name, train=True,bias=True):
     with tf.variable_scope(name):
-        '''Akash: I changed the kernel from 5 to 4'''
         w = tf.get_variable("w",[4,4,inputFeatures, outputFeatures], initializer=tf.truncated_normal_initializer(stddev=0.02), trainable=train)
         b = tf.get_variable("b",[outputFeatures], initializer=tf.constant_initializer(0.0))
         if bias:
@@ -52,7 +51,6 @@ def conv2d(x, inputFeatures, outputFeatures, name, train=True,bias=True):
 def conv_transpose(x, outputShape, name):
     with tf.variable_scope(name):
         # h, w, out, in
-        '''Akash: I changed the kernel from 5 to 4'''
         w = tf.get_variable("w",[4,4, outputShape[-1], x.get_shape()[-1]], initializer=tf.truncated_normal_initializer(stddev=0.02))
         b = tf.get_variable("b",[outputShape[-1]], initializer=tf.constant_initializer(0.0))
         convt = tf.nn.conv2d_transpose(x, w, output_shape=outputShape, strides=[1,2,2,1])
